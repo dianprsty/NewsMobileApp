@@ -8,4 +8,9 @@
     <string name="home">Home</string>
     <string name="explore">Explore</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="sample_title">Health Ministry to set up independent body to probe malpractice claims</string>
+    <string name="sample_headline">The Health Ministry is to form an independent board to better protect health professionals from malpractice litigation, in line with the new Health Law.</string>
+    <string name="sample_image_description">Sample Image Description</string>
+    <string name="sample_news_time">1 day ago</string>
+    <string name="sample_category">Society</string>
 </resources>

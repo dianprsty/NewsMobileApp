@@ -1,11 +1,21 @@
 package id.dianprasetyo.newsmobileapp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.dianprasetyo.newsmobileapp.R
+import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
+import id.dianprasetyo.newsmobileapp.api.APIConfig
+import id.dianprasetyo.newsmobileapp.databinding.FragmentExploreBinding
+import id.dianprasetyo.newsmobileapp.model.ResponseNews
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +32,8 @@ class ExploreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding : FragmentExploreBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +46,28 @@ class ExploreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false)
+        binding = FragmentExploreBinding.inflate(layoutInflater)
+        APIConfig.getService().getNewsByCategory("indonesia").enqueue(object : Callback<ResponseNews> {
+            override fun onResponse(call: Call<ResponseNews>, response: Response<ResponseNews>) {
+                if (response.isSuccessful) {
+                    val responseNews = response.body()
+                    val postsItem = responseNews?.posts
+                    val adapterNews = AdapterNewsExplore(postsItem)
+                    binding.rvExploreNews.apply {
+                        layoutManager = LinearLayoutManager(requireContext())
+                        setHasFixedSize(true)
+                        adapterNews.notifyDataSetChanged()
+                        adapter = adapterNews
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseNews>, t: Throwable) {
+                Toast.makeText(requireContext().applicationContext, "Data not Found", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+        return binding.root
     }
 
     companion object {
