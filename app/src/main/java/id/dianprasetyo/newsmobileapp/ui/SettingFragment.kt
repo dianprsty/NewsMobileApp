@@ -1,26 +1,43 @@
 package id.dianprasetyo.newsmobileapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import id.dianprasetyo.newsmobileapp.R
+import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
+import id.dianprasetyo.newsmobileapp.databinding.FragmentSettingBinding
+import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
+import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+
 /**
  * A simple [Fragment] subclass.
  * Use the [SettingFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SettingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
+
+class SettingFragment() : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var binding: FragmentSettingBinding
+    private lateinit var themeViewModel: ThemeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +51,24 @@ class SettingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false)
+        binding = FragmentSettingBinding.inflate(layoutInflater)
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        themeViewModel =
+            ViewModelProvider(this, ViewModelFactory(pref))[ThemeViewModel::class.java]
+        themeViewModel.getTheme().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.switchTheme.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.switchTheme.isChecked = false
+            }
+        }
+
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            themeViewModel.saveTheme(isChecked)
+        }
+        return binding.root
     }
 
     companion object {
@@ -57,4 +90,6 @@ class SettingFragment : Fragment() {
                 }
             }
     }
+
+
 }
