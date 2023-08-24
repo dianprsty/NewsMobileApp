@@ -1,8 +1,34 @@
 package id.dianprasetyo.newsmobileapp.viewmodel
 
 import android.app.Application
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import id.dianprasetyo.newsmobileapp.model.PostsItem
 
 class NewsViewModel(application: Application) : ViewModel() {
-    //TODO
+    private var newsList : MutableList<PostsItem?> = mutableListOf()
+
+    private val _currentNewsList = MutableLiveData<MutableList<PostsItem?>>()
+    fun currentNewsList(): LiveData<MutableList<PostsItem?>> = _currentNewsList
+
+   fun addNews(listNews: List<PostsItem?>?){
+        newsList.addAll(listNews!!)
+        _currentNewsList.value = newsList
+    }
+
+    fun filterNews(query : String?){
+        val filteredList = ArrayList<PostsItem?>()
+        for (news in _currentNewsList.value!!){
+            if(news?.title?.lowercase()!!.contains(query!!.lowercase())){
+                filteredList.add(news)
+            }
+        }
+        _currentNewsList.value = filteredList
+    }
+
+    fun resetFilter(){
+        _currentNewsList.value = newsList
+    }
 }
+

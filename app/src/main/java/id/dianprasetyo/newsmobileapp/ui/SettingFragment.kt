@@ -13,7 +13,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSettingBinding
-import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
+import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 
@@ -54,7 +54,7 @@ class SettingFragment() : Fragment() {
         binding = FragmentSettingBinding.inflate(layoutInflater)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         themeViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[ThemeViewModel::class.java]
+            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
         themeViewModel.getTheme().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

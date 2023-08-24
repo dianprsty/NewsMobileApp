@@ -7,12 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.FragmentExploreBinding
+import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
 import id.dianprasetyo.newsmobileapp.model.ResponseNews
+import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +37,9 @@ class ExploreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding : FragmentExploreBinding
+    private var binding : FragmentExploreBinding? = null
+    private lateinit var newsViewModel: NewsViewModel
+    private var adapterNewsExplore: AdapterNewsExplore? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,27 +54,43 @@ class ExploreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentExploreBinding.inflate(layoutInflater)
-        APIConfig.getService().getNewsByCategory("indonesia").enqueue(object : Callback<ResponseNews> {
-            override fun onResponse(call: Call<ResponseNews>, response: Response<ResponseNews>) {
-                if (response.isSuccessful) {
-                    val responseNews = response.body()
-                    val postsItem = responseNews?.posts
-                    val adapterNews = AdapterNewsExplore(postsItem)
-                    binding.rvExploreNews.apply {
-                        layoutManager = LinearLayoutManager(requireContext())
-                        setHasFixedSize(true)
-                        adapterNews.notifyDataSetChanged()
-                        adapter = adapterNews
-                    }
-                }
+        newsViewModel = obtainViewModel(requireActivity() as AppCompatActivity)
+
+
+        newsViewModel.currentNewsList().observe(viewLifecycleOwner){ newsItem ->
+            if( newsItem != null){
+                adapterNewsExplore?.setNewsItem(newsItem)
+                adapterNewsExplore?.notifyDataSetChanged()
+            }
+        }
+
+        binding?.svSearch?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                newsViewModel.filterNews(query)
+                return true
             }
 
-            override fun onFailure(call: Call<ResponseNews>, t: Throwable) {
-                Toast.makeText(requireContext().applicationContext, "Data not Found", Toast.LENGTH_SHORT).show()
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if(newText?.length == 0){
+                    newsViewModel.resetFilter()
+                }
+                return true
             }
 
         })
-        return binding.root
+
+
+
+        adapterNewsExplore = AdapterNewsExplore(newsViewModel)
+        binding?.rvExploreNews?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = adapterNewsExplore
+        }
+
+
+
+        return binding?.root
     }
 
     companion object {
@@ -88,5 +111,15 @@ class ExploreFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): NewsViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[NewsViewModel::class.java]
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

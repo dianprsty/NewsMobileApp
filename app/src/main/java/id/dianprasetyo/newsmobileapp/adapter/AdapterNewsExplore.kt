@@ -8,8 +8,17 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.model.PostsItem
+import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 
-class AdapterNewsExplore(val dataNews: List<PostsItem?>?) : RecyclerView.Adapter<AdapterNewsExplore.ListViewHolder>() {
+class AdapterNewsExplore(val viewModel: NewsViewModel) : RecyclerView.Adapter<AdapterNewsExplore.ListViewHolder>() {
+
+    val dataNews = ArrayList<PostsItem?>()
+
+    fun setNewsItem(listNews: List<PostsItem?>){
+        dataNews.clear()
+        dataNews.addAll(listNews)
+    }
+
 
     class ListViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         val tvNewsTitle = view.findViewById<TextView>(R.id.tv_news_title)

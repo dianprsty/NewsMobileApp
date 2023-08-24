@@ -10,15 +10,15 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.dianprasetyo.newsmobileapp.R
-import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.ActivityMainBinding
+import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
 import id.dianprasetyo.newsmobileapp.model.PostsItem
 import id.dianprasetyo.newsmobileapp.model.ResponseNews
 import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,39 +27,50 @@ import retrofit2.Response
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var binding: ActivityMainBinding? = null
     private lateinit var themeViewModel: ThemeViewModel
+    private lateinit var newsViewModel : NewsViewModel
+    private val listCategory = listOf<String>(
+        "indonesia", "indonesia/politics", "indonesia/jakarta", "indonesia/society",
+        "indonesia/archipelago", "business", "business/economy" , "business/tech", "business/companies",
+        "business/regulations", "business/markets", "world", "world/asia-pacific", "world/americas",
+        "world/europe", "world/middle-east-africa", "academia/opinion", "academia/editorial",
+        "academia/insight", "academia/analysis", "academia", "academia/interview", "life",
+        "life/style", "life/entertainment",
+        "life/arts-culture", "life/science-tech", "life/people", "life/health", "life/parents",
+        "life/food", "life/books", "life/environment"
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
-        val pref = SettingPreferences.getInstance(dataStore)
-        themeViewModel =
-            ViewModelProvider(this, ViewModelFactory(pref))[ThemeViewModel::class.java]
-        themeViewModel.getTheme().observe(this) { isDarkModeActive: Boolean ->
-            if (isDarkModeActive) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+        getCurrentTheme()
+
+        newsViewModel = obtainViewModel(this@MainActivity)
+
+
+        for(category in listCategory){
+            fetchNews(category)
         }
-
         if (savedInstanceState == null){
             loadFragment(HomeFragment())
         }
 
-        binding.bottomNavigation.setOnItemSelectedListener {
+        binding?.bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.menu_home -> {
                     loadFragment(HomeFragment())
                 }
+
                 R.id.menu_explore -> {
                     loadFragment(ExploreFragment())
                 }
+
                 R.id.menu_saved -> {
                     loadFragment(SavedFragment())
                 }
+
                 R.id.menu_setting -> {
                     loadFragment(SettingFragment())
                 }
@@ -81,16 +92,27 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun fetchNews(path : String, newsData : List<PostsItem>){
+    private fun getCurrentTheme(){
+        val pref = SettingPreferences.getInstance(dataStore)
+        themeViewModel =
+            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
+        themeViewModel.getTheme().observe(this) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+    }
+
+    private fun fetchNews(path : String){
         APIConfig.getService().getNewsByCategory(path).enqueue(object :
             Callback<ResponseNews> {
             override fun onResponse(call: Call<ResponseNews>, response: Response<ResponseNews>) {
                 if (response.isSuccessful) {
                     val responseNews = response.body()
                     val postsItem = responseNews?.posts
-                    var index = newsData.size
-                    //newsData.addAll(index, postsItem as Collection<PostsItem>)
-                    return
+                    newsViewModel.addNews(postsItem)
                 }
             }
 
@@ -99,6 +121,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): NewsViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[NewsViewModel::class.java]
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
 }
