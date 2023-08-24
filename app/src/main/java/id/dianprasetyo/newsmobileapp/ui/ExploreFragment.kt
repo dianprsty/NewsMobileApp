@@ -81,7 +81,7 @@ class ExploreFragment : Fragment() {
 
 
 
-        adapterNewsExplore = AdapterNewsExplore(newsViewModel)
+        adapterNewsExplore = AdapterNewsExplore(requireContext())
         binding?.rvExploreNews?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)

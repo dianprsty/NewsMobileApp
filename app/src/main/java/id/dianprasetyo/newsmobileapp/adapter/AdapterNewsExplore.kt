@@ -1,5 +1,7 @@
 package id.dianprasetyo.newsmobileapp.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +10,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.model.PostsItem
+import id.dianprasetyo.newsmobileapp.ui.NewsDetailActivity
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 
-class AdapterNewsExplore(val viewModel: NewsViewModel) : RecyclerView.Adapter<AdapterNewsExplore.ListViewHolder>() {
+class AdapterNewsExplore(val context: Context) : RecyclerView.Adapter<AdapterNewsExplore.ListViewHolder>() {
 
     val dataNews = ArrayList<PostsItem?>()
 
@@ -36,8 +39,10 @@ class AdapterNewsExplore(val viewModel: NewsViewModel) : RecyclerView.Adapter<Ad
             tvNewsHeadline.text = dataNews?.get(position)?.headline
 
             itemView.setOnClickListener {
-                val title = dataNews?.get(position)?.title
-                Toast.makeText(holder.itemView.context, "$title", Toast.LENGTH_SHORT).show()
+                val link = dataNews?.get(position)?.link
+                val moveWithDataIntent = Intent(context, NewsDetailActivity::class.java)
+                moveWithDataIntent.putExtra(NewsDetailActivity.EXTRA_URL, link)
+                context.startActivity(moveWithDataIntent)
             }
         }
     }
