@@ -18,7 +18,7 @@
             android:name=".ui.NewsListByCategoryActivity"
             android:exported="false"
             android:label="News List"
-            android:theme="@style/Base.Theme.NewsMobileApp.ActionBar"/>
+            android:theme="@style/Base.Theme.NewsMobileApp.ActionBar" />
         <activity
             android:name=".ui.NewsDetailActivity"
             android:exported="false"
