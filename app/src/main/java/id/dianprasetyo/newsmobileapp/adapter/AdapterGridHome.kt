@@ -48,10 +48,6 @@ class AdapterGridHome(val context:Context) : BaseAdapter(){
                 val llGrid = view.findViewById<LinearLayout>(R.id.ll_grid)
 
                 ivCategory.setImageResource(listCategory?.get(position)?.categoryImg!!)
-                ivCategory.setColorFilter(
-                        com.google.android.material.R.color.design_default_color_primary_dark,
-                        PorterDuff.Mode.MULTIPLY
-                )
                 tvCategory.text = listCategory?.get(position)?.categoryName
 
                 llGrid.setOnClickListener {

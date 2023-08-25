@@ -1,14 +1,25 @@
 package id.dianprasetyo.newsmobileapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterGridHome
 import id.dianprasetyo.newsmobileapp.databinding.FragmentHomeBinding
+import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.model.CategoryModel
+import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
+import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +39,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
 
     private var binding: FragmentHomeBinding? = null
+    private lateinit var themeViewModel: ThemeViewModel
     private lateinit var listCategory : List<CategoryModel>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +53,11 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentHomeBinding.inflate(layoutInflater)
         listCategory = ArrayList<CategoryModel>()
+
+        getCurrentTheme()
 
         val adapterGridHome = AdapterGridHome(requireContext())
         listCategory += CategoryModel("Book", R.drawable.baseline_menu_book_24, "https://jakpost.vercel.app/api/category/life/books")
@@ -80,5 +95,20 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun getCurrentTheme(){
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        themeViewModel =
+            ViewModelProvider(this, ThemeViewModelFactory(pref))[ThemeViewModel::class.java]
+        themeViewModel.getTheme().observe(viewLifecycleOwner) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding?.rlHome?.setBackgroundResource(R.drawable.layout_bg_dark)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding?.rlHome?.setBackgroundResource(R.drawable.layout_bg_light)
+            }
+        }
     }
 }

@@ -52,9 +52,9 @@
                 android:id="@+id/gv_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:horizontalSpacing="16dp"
+                android:horizontalSpacing="20dp"
                 android:numColumns="3"
-                android:verticalSpacing="16dp"
+                android:verticalSpacing="24dp"
                 tools:listitem="@layout/item_grid_view_home" />
 
         </RelativeLayout>
