@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:padding="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginBottom="4dp"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
     app:cardMaxElevation="4dp"
@@ -17,18 +17,6 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         >
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_news_img"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="150dp"-->
-<!--            android:scaleType="fitXY"-->
-<!--            android:adjustViewBounds="true"-->
-<!--            android:contentDescription="@string/sample_image_description"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:src="@tools:sample/backgrounds/scenic"/>-->
-
 
         <TextView
             android:id="@+id/tv_news_title"
@@ -41,37 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_save"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginTop="8dp"-->
-<!--            android:layout_marginEnd="4dp"-->
-<!--            android:src="@drawable/baseline_bookmark_border_24"-->
-<!--            app:layout_constraintStart_toStartOf="@id/tv_news_title"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/tv_news_title" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_news_published_at"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/sample_news_time"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginLeft="8dp"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/iv_save"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"-->
-<!--            android:textColor="@color/design_default_color_primary"/>-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_news_category"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/sample_category"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            android:layout_marginLeft="8dp"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/tv_news_published_at"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"-->
-<!--            android:textColor="@color/design_default_color_primary"/>-->
 
         <TextView
             android:id="@+id/tv_news_headline"

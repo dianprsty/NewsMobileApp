@@ -15,9 +15,8 @@ import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.ActivityMainBinding
 import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
-import id.dianprasetyo.newsmobileapp.model.PostsItem
 import id.dianprasetyo.newsmobileapp.model.ResponseNews
-import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 import retrofit2.Call

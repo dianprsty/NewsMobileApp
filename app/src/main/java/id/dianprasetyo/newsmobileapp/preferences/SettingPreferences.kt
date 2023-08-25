@@ -1,4 +1,4 @@
-package id.dianprasetyo.newsmobileapp.repository
+package id.dianprasetyo.newsmobileapp.preferences
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

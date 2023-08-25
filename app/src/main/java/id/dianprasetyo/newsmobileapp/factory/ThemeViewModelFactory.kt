@@ -2,7 +2,7 @@ package id.dianprasetyo.newsmobileapp.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 
 class ThemeViewModelFactory(private val pref: SettingPreferences) : ViewModelProvider.NewInstanceFactory() {

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -13,16 +12,13 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.ActivityNewsDetailBinding
 import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
-import id.dianprasetyo.newsmobileapp.model.ResponseNews
 import id.dianprasetyo.newsmobileapp.model.ResponseNewsDetail
-import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsDetailViewModel
-import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 import retrofit2.Call
 import retrofit2.Callback

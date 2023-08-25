@@ -5,7 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import id.dianprasetyo.newsmobileapp.R
+import id.dianprasetyo.newsmobileapp.adapter.AdapterGridHome
+import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
+import id.dianprasetyo.newsmobileapp.databinding.FragmentHomeBinding
+import id.dianprasetyo.newsmobileapp.model.GridViewModal
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,11 +22,15 @@ private const val ARG_PARAM2 = "param2"
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+    private var binding: FragmentHomeBinding? = null
+    private lateinit var listCategory : List<GridViewModal>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +43,25 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+        listCategory = ArrayList<GridViewModal>()
+
+        val adapterGridHome = AdapterGridHome(requireContext())
+        listCategory += GridViewModal("Book", R.drawable.baseline_menu_book_24, "https://jakpost.vercel.app/api/category/life/books")
+        listCategory += GridViewModal("Economy", R.drawable.baseline_currency_exchange_24, "https://jakpost.vercel.app/api/category/business/economy")
+        listCategory += GridViewModal("Entertainment", R.drawable.baseline_slow_motion_video_24, "https://jakpost.vercel.app/api/category/life/entertainment")
+        listCategory += GridViewModal("Heath", R.drawable.baseline_health_and_safety_24, "https://jakpost.vercel.app/api/category/life/health")
+        listCategory += GridViewModal("Opinion", R.drawable.baseline_comment_24, "https://jakpost.vercel.app/api/category/academia/opinion")
+        listCategory += GridViewModal("People", R.drawable.baseline_people_alt_24, "https://jakpost.vercel.app/api/category/life/people")
+        listCategory += GridViewModal("Politic", R.drawable.baseline_emoji_people_24, "https://jakpost.vercel.app/api/category/indonesia/politics")
+        listCategory += GridViewModal("Technology", R.drawable.baseline_computer_24, "https://jakpost.vercel.app/api/category/business/tech")
+        listCategory += GridViewModal("World", R.drawable.baseline_language_24, "https://jakpost.vercel.app/api/category/world")
+        adapterGridHome.addCategory(listCategory)
+        binding?.gvHome?.apply {
+            adapter = adapterGridHome
+        }
+
+        return binding?.root
     }
 
     companion object {

@@ -14,7 +14,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSettingBinding
 import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
-import id.dianprasetyo.newsmobileapp.repository.SettingPreferences
+import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
 import id.dianprasetyo.newsmobileapp.viewmodel.ThemeViewModel
 
 // TODO: Rename parameter arguments, choose names that match
