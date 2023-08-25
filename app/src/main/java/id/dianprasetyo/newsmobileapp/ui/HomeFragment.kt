@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterGridHome
-import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.databinding.FragmentHomeBinding
-import id.dianprasetyo.newsmobileapp.model.GridViewModal
+import id.dianprasetyo.newsmobileapp.model.CategoryModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +28,7 @@ class HomeFragment : Fragment() {
     private var param2: String? = null
 
     private var binding: FragmentHomeBinding? = null
-    private lateinit var listCategory : List<GridViewModal>
+    private lateinit var listCategory : List<CategoryModel>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,18 +42,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
-        listCategory = ArrayList<GridViewModal>()
+        listCategory = ArrayList<CategoryModel>()
 
         val adapterGridHome = AdapterGridHome(requireContext())
-        listCategory += GridViewModal("Book", R.drawable.baseline_menu_book_24, "https://jakpost.vercel.app/api/category/life/books")
-        listCategory += GridViewModal("Economy", R.drawable.baseline_currency_exchange_24, "https://jakpost.vercel.app/api/category/business/economy")
-        listCategory += GridViewModal("Entertainment", R.drawable.baseline_slow_motion_video_24, "https://jakpost.vercel.app/api/category/life/entertainment")
-        listCategory += GridViewModal("Heath", R.drawable.baseline_health_and_safety_24, "https://jakpost.vercel.app/api/category/life/health")
-        listCategory += GridViewModal("Opinion", R.drawable.baseline_comment_24, "https://jakpost.vercel.app/api/category/academia/opinion")
-        listCategory += GridViewModal("People", R.drawable.baseline_people_alt_24, "https://jakpost.vercel.app/api/category/life/people")
-        listCategory += GridViewModal("Politic", R.drawable.baseline_emoji_people_24, "https://jakpost.vercel.app/api/category/indonesia/politics")
-        listCategory += GridViewModal("Technology", R.drawable.baseline_computer_24, "https://jakpost.vercel.app/api/category/business/tech")
-        listCategory += GridViewModal("World", R.drawable.baseline_language_24, "https://jakpost.vercel.app/api/category/world")
+        listCategory += CategoryModel("Book", R.drawable.baseline_menu_book_24, "https://jakpost.vercel.app/api/category/life/books")
+        listCategory += CategoryModel("Economy", R.drawable.baseline_currency_exchange_24, "https://jakpost.vercel.app/api/category/business/economy")
+        listCategory += CategoryModel("Entertainment", R.drawable.baseline_slow_motion_video_24, "https://jakpost.vercel.app/api/category/life/entertainment")
+        listCategory += CategoryModel("Heath", R.drawable.baseline_health_and_safety_24, "https://jakpost.vercel.app/api/category/life/health")
+        listCategory += CategoryModel("Opinion", R.drawable.baseline_comment_24, "https://jakpost.vercel.app/api/category/academia/opinion")
+        listCategory += CategoryModel("People", R.drawable.baseline_people_alt_24, "https://jakpost.vercel.app/api/category/life/people")
+        listCategory += CategoryModel("Politic", R.drawable.baseline_emoji_people_24, "https://jakpost.vercel.app/api/category/indonesia/politics")
+        listCategory += CategoryModel("Technology", R.drawable.baseline_computer_24, "https://jakpost.vercel.app/api/category/business/tech")
+        listCategory += CategoryModel("World", R.drawable.baseline_language_24, "https://jakpost.vercel.app/api/category/world")
         adapterGridHome.addCategory(listCategory)
         binding?.gvHome?.apply {
             adapter = adapterGridHome

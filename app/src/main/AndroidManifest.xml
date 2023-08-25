@@ -15,12 +15,15 @@
         android:theme="@style/Theme.NewsMobileApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.NewsListByCategoryActivity"
+            android:exported="false"
+            android:label="News List"
+            android:theme="@style/Base.Theme.NewsMobileApp.ActionBar"/>
+        <activity
             android:name=".ui.NewsDetailActivity"
-            android:theme="@style/Base.Theme.NewsMobileApp.ActionBar"
             android:exported="false"
             android:label="News Detail"
-            />
-
+            android:theme="@style/Base.Theme.NewsMobileApp.ActionBar" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

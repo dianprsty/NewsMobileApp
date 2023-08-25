@@ -3,28 +3,24 @@ package id.dianprasetyo.newsmobileapp.adapter;
 
 import android.content.Context;
 import android.content.Intent
-import android.database.DataSetObserver
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.GridView
 import android.widget.ImageView
-import android.widget.ListAdapter
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import id.dianprasetyo.newsmobileapp.R
-import id.dianprasetyo.newsmobileapp.model.GridViewModal
-import id.dianprasetyo.newsmobileapp.model.PostsItem
-import id.dianprasetyo.newsmobileapp.ui.NewsDetailActivity
+import id.dianprasetyo.newsmobileapp.model.CategoryModel
+import id.dianprasetyo.newsmobileapp.ui.NewsListByCategoryActivity
 
 class AdapterGridHome(val context:Context) : BaseAdapter(){
 
-        val listCategory = ArrayList<GridViewModal>()
+        val listCategory = ArrayList<CategoryModel>()
 
-        fun addCategory(gridViewModal:List<GridViewModal>) {
-                listCategory.addAll(gridViewModal)
+        fun addCategory(categoryModel:List<CategoryModel>) {
+                listCategory.addAll(categoryModel)
         }
 
         override fun getCount(): Int {
@@ -49,18 +45,24 @@ class AdapterGridHome(val context:Context) : BaseAdapter(){
 
                 val ivCategory = view.findViewById<ImageView>(R.id.iv_category)
                 val tvCategory = view.findViewById<TextView>(R.id.tv_category)
+                val llGrid = view.findViewById<LinearLayout>(R.id.ll_grid)
 
                 ivCategory.setImageResource(listCategory?.get(position)?.categoryImg!!)
-                ivCategory.setColorFilter(com.google.android.material.R.color.design_default_color_primary_dark, PorterDuff.Mode.MULTIPLY)
+                ivCategory.setColorFilter(
+                        com.google.android.material.R.color.design_default_color_primary_dark,
+                        PorterDuff.Mode.MULTIPLY
+                )
                 tvCategory.text = listCategory?.get(position)?.categoryName
 
-//                itemView.setOnClickListener {
-//                        val link = dataNews?.get(position)?.link
-//                        val moveWithDataIntent = Intent(context, NewsDetailActivity::class.java)
-//                        moveWithDataIntent.putExtra(NewsDetailActivity.EXTRA_URL, link)
-//                        context.startActivity(moveWithDataIntent)
-//                        }
-//                }
+                llGrid.setOnClickListener {
+                        val link = listCategory?.get(position)?.categoryUrl
+                        val category = listCategory?.get(position)?.categoryName
+                        val moveWithDataIntent = Intent(context, NewsListByCategoryActivity::class.java)
+                        moveWithDataIntent.putExtra(NewsListByCategoryActivity.EXTRA_URL, link)
+                        moveWithDataIntent.putExtra(NewsListByCategoryActivity.EXTRA_CATEGORY, category)
+                        context.startActivity(moveWithDataIntent)
+
+                }
 
                 return view
         }
