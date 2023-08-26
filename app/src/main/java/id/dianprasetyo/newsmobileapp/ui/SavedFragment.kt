@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import id.dianprasetyo.newsmobileapp.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.dianprasetyo.newsmobileapp.adapter.AdapterSavedNews
+import id.dianprasetyo.newsmobileapp.databinding.FragmentSavedBinding
+import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
+import id.dianprasetyo.newsmobileapp.viewmodel.SavedNewsViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +28,10 @@ class SavedFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var binding : FragmentSavedBinding? = null
+    private lateinit var savedNewsViewModel: SavedNewsViewModel
+    private var adapterSavedNews : AdapterSavedNews? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,8 +44,27 @@ class SavedFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saved, container, false)
+        binding = FragmentSavedBinding.inflate(layoutInflater)
+
+        savedNewsViewModel = obtainViewModel(requireActivity() as AppCompatActivity)
+
+
+        savedNewsViewModel.getAllSavedNews().observe(viewLifecycleOwner){ savedNews ->
+            if( savedNews != null){
+                adapterSavedNews?.setNewsItem(savedNews)
+                adapterSavedNews?.notifyDataSetChanged()
+            }
+        }
+
+        adapterSavedNews = AdapterSavedNews(requireContext(), savedNewsViewModel)
+        binding?.rvSavedNews?.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = adapterSavedNews
+        }
+
+
+        return binding?.root
     }
 
     companion object {
@@ -56,5 +85,15 @@ class SavedFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    private fun obtainViewModel(activity: AppCompatActivity): SavedNewsViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory)[SavedNewsViewModel::class.java]
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

@@ -83,24 +83,24 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_news_img"
             android:textColor="@color/design_default_color_primary"/>
 
-        <TextView
-            android:id="@+id/tv_news_author_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="author : "
-            android:layout_marginTop="12dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_save"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_news_author_label"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="author : "-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/iv_save"/>-->
 
         <TextView
             android:id="@+id/tv_news_author"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
             android:textStyle="bold"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toEndOf="@+id/tv_news_author_label"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_save"/>
 
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsDetailViewModel
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsListByCategoryViewModel
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
+import id.dianprasetyo.newsmobileapp.viewmodel.SavedNewsViewModel
 
 class ViewModelFactory private constructor(private val application: Application) :
     ViewModelProvider.NewInstanceFactory() {
@@ -18,6 +19,8 @@ class ViewModelFactory private constructor(private val application: Application)
                 return NewsDetailViewModel(application) as T
         } else if (modelClass.isAssignableFrom(NewsListByCategoryViewModel::class.java)) {
             return NewsListByCategoryViewModel(application) as T
+        } else if (modelClass.isAssignableFrom(SavedNewsViewModel::class.java)) {
+            return SavedNewsViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
