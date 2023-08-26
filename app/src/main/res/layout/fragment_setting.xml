@@ -1,27 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".ui.SettingFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ThemeActivity">
+
+        <TextView
+            android:id="@+id/tv_dark_mode_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="8dp"
+            android:text="Dark Mode"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_dark_mode"
+            android:layout_width="42dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="darkmode icon"
+            android:src="@drawable/baseline_dark_mode_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dark_mode_title" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/switch_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dark_mode"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Turn On/Off"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dark_mode_title"
+            app:layout_constraintStart_toEndOf="@+id/iv_dark_mode"/>
+
+        <TextView
+            android:id="@+id/tv_about_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_dark_mode"
+            android:layout_marginTop="28dp"
+            android:text="About This Project"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_developer_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_about_title"
+            android:layout_marginTop="16dp"
+            android:text="Developed by : Dian Prasetyo"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_github_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_developer_label"
+            android:layout_marginTop="16dp"
+            android:text="Github : @dianprsty"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_email_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_github_label"
+            android:layout_marginTop="16dp"
+            android:text="Email : dprasmail@gmail.com"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_icon_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_label"
+            android:layout_marginTop="16dp"
+            android:text="Icon Pack by : flaticon.com"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_api_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_icon_label"
+            android:layout_marginTop="16dp"
+            android:text="News Api by : github.com/faruqmaulana/JAKARTA-POST-API"
+            android:textSize="16sp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -18,4 +18,5 @@
     <string name="welcome_back">Welcome Back!</string>
     <string name="hero_desciption">Let\'s read Our most updated news from various category</string>
     <string name="delete_button">delete button</string>
+    <string name="saved_news">Saved News</string>
 </resources>

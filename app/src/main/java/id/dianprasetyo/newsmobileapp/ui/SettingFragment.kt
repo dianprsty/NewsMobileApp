@@ -12,6 +12,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSettingBinding
 import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
 import id.dianprasetyo.newsmobileapp.preferences.SettingPreferences
@@ -59,9 +60,11 @@ class SettingFragment() : Fragment() {
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
+                binding.ivDarkMode.setImageResource(R.drawable.baseline_dark_mode_white_24)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding.switchTheme.isChecked = false
+                binding.ivDarkMode.setImageResource(R.drawable.baseline_dark_mode_24)
             }
         }
 
