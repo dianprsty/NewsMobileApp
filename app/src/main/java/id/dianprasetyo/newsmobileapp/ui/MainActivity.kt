@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.get
 import androidx.datastore.core.DataStore
@@ -82,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     private fun loadFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager

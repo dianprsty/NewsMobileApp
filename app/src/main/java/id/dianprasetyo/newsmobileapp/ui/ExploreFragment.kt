@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.api.APIConfig
@@ -61,8 +63,11 @@ class ExploreFragment : Fragment() {
 
         newsViewModel.currentNewsList().observe(viewLifecycleOwner){ newsItem ->
             if( newsItem != null){
+                showLoading(false)
                 adapterNewsExplore?.setNewsItem(newsItem)
                 adapterNewsExplore?.notifyDataSetChanged()
+            }else{
+                showLoading(true)
             }
         }
 
@@ -117,15 +122,27 @@ class ExploreFragment : Fragment() {
     fun handleBackPressed(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                bottomNav.selectedItemId = R.id.menu_home
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
 
                 fragmentTransaction
                     .replace(R.id.fragment_container, HomeFragment())
                     .commit()
+
             }
         })
 
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding?.progressBar?.visibility = View.VISIBLE
+
+        } else {
+            binding?.progressBar?.visibility = View.GONE
+        }
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): NewsViewModel {

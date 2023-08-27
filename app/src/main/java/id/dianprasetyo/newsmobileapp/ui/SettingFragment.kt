@@ -13,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSettingBinding
 import id.dianprasetyo.newsmobileapp.factory.ThemeViewModelFactory
@@ -100,6 +101,8 @@ class SettingFragment() : Fragment() {
     fun handleBackPressed(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                bottomNav.selectedItemId = R.id.menu_home
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
 

@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterSavedNews
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSavedBinding
@@ -98,6 +99,8 @@ class SavedFragment : Fragment() {
     fun handleBackPressed(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
+                val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+                bottomNav.selectedItemId = R.id.menu_home
                 val fragmentManager = parentFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
 
