@@ -20,6 +20,7 @@ import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.FragmentExploreBinding
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
+import id.dianprasetyo.newsmobileapp.model.PostsItem
 import id.dianprasetyo.newsmobileapp.model.ResponseNews
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import retrofit2.Call
@@ -61,10 +62,20 @@ class ExploreFragment : Fragment() {
         newsViewModel = obtainViewModel(requireActivity() as AppCompatActivity)
 
 
-        newsViewModel.currentNewsList().observe(viewLifecycleOwner){ newsItem ->
-            if( newsItem != null){
+        newsViewModel.currentNewsList().observe(viewLifecycleOwner){ listNewsItem ->
+            if( listNewsItem != null){
                 showLoading(false)
-                adapterNewsExplore?.setNewsItem(newsItem)
+                var filteredNewsData = ArrayList<PostsItem?>()
+
+                sortNews("second", listNewsItem, filteredNewsData)
+                sortNews("minute", listNewsItem, filteredNewsData)
+                sortNews("hour", listNewsItem, filteredNewsData)
+                sortNews("day", listNewsItem, filteredNewsData)
+                sortNews("week", listNewsItem, filteredNewsData)
+                sortNews("month", listNewsItem, filteredNewsData)
+                sortNews("year", listNewsItem, filteredNewsData)
+
+                adapterNewsExplore?.setNewsItem(filteredNewsData)
                 adapterNewsExplore?.notifyDataSetChanged()
             }else{
                 showLoading(true)
@@ -117,6 +128,12 @@ class ExploreFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun sortNews(param : String , listNews : MutableList<PostsItem?>, filteredNewsData: ArrayList<PostsItem?>){
+
+        val listDay = listNews.filter { it?.pusblisedAt!!.contains(param) }
+        filteredNewsData.addAll(listDay.sortedBy { it?.pusblisedAt })
     }
 
     fun handleBackPressed(){

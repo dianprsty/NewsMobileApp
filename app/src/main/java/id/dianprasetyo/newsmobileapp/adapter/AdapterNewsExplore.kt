@@ -5,9 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.model.PostsItem
 import id.dianprasetyo.newsmobileapp.ui.NewsDetailActivity
@@ -26,6 +29,9 @@ class AdapterNewsExplore(val context: Context) : RecyclerView.Adapter<AdapterNew
     class ListViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         val tvNewsTitle = view.findViewById<TextView>(R.id.tv_news_title)
         val tvNewsHeadline = view.findViewById<TextView>(R.id.tv_news_headline)
+        val tvPublishedAt = view.findViewById<TextView>(R.id.tv_news_published_at)
+        val ivNewsImg = view.findViewById<ImageView>(R.id.iv_news_img)
+        val root = view.rootView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -35,8 +41,14 @@ class AdapterNewsExplore(val context: Context) : RecyclerView.Adapter<AdapterNew
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.apply {
-            tvNewsTitle.text = dataNews.get(position)?.title
-            tvNewsHeadline.text = dataNews.get(position)?.headline
+            tvNewsTitle.text = dataNews[position]?.title
+            tvNewsHeadline.text = dataNews[position]?.headline
+            tvPublishedAt.text = dataNews[position]?.pusblisedAt
+
+            Glide.with(root)
+                .load(dataNews[position]?.image)
+                .apply(RequestOptions())
+                .into(ivNewsImg)
 
             itemView.setOnClickListener {
                 val link = dataNews[position]?.link

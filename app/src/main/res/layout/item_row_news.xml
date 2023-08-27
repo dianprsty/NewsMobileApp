@@ -26,9 +26,32 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp"
+            android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
+        <ImageView
+            android:id="@+id/iv_news_img"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/sample_image_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
+            tools:src="@tools:sample/backgrounds/scenic"
+            />
+
+        <TextView
+            android:id="@+id/tv_news_published_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_news_time"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_news_img"/>
 
         <TextView
             android:id="@+id/tv_news_headline"
@@ -36,8 +59,9 @@
             android:layout_height="wrap_content"
             android:text="@string/sample_headline"
             android:layout_marginTop="8dp"
+            android:justificationMode="inter_word"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_published_at"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
