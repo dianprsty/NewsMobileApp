@@ -49,11 +49,7 @@ class NewsDetailActivity : AppCompatActivity() {
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-
 
         getCurrentTheme()
 
@@ -89,6 +85,7 @@ class NewsDetailActivity : AppCompatActivity() {
                             it?.title = detailPost.title
                             it?.url = fullPath
                             it?.headline = headline
+                            it?.date= detailPost.pusblisedAt
                         }
                         if(savedNewsId == 0){
 

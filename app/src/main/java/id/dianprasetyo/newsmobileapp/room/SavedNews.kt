@@ -21,6 +21,9 @@ data class SavedNews (
     var headline: String? = null,
 
     @ColumnInfo(name = "url")
-    var url: String? = null
+    var url: String? = null,
+
+    @ColumnInfo(name = "date")
+    var date: String? = null
 
 )  : Parcelable

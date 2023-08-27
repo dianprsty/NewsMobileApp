@@ -32,6 +32,7 @@ class AdapterSavedNews(
     class ListViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         val tvNewsTitle = view.findViewById<TextView>(R.id.tv_news_title)
         val tvNewsHeadline = view.findViewById<TextView>(R.id.tv_news_headline)
+        val tvPublishedAt = view.findViewById<TextView>(R.id.tv_news_published_at)
         val ivDelete = view.findViewById<ImageView>(R.id.iv_delete)
     }
 
@@ -44,6 +45,7 @@ class AdapterSavedNews(
         holder.apply {
             tvNewsTitle.text = dataNews[position]?.title
             tvNewsHeadline.text = dataNews[position]?.headline
+            tvPublishedAt.text = dataNews[position]?.date
 
             tvNewsTitle.setOnClickListener {
                 val link = dataNews[position]?.url

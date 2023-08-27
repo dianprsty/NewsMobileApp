@@ -28,6 +28,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_news_published_at"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sample_published_at"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"/>
 
         <TextView
             android:id="@+id/tv_news_headline"
@@ -36,7 +44,8 @@
             android:text="@string/sample_headline"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_news_title"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_news_published_at"/>
+
 
         <ImageView
             android:id="@+id/iv_delete"

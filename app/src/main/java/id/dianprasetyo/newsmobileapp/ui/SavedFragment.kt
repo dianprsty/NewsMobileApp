@@ -54,8 +54,13 @@ class SavedFragment : Fragment() {
 
         savedNewsViewModel.getAllSavedNews().observe(viewLifecycleOwner){ savedNews ->
             if( savedNews != null){
+                binding?.tvSavedEmpty!!.visibility = View.GONE
                 adapterSavedNews?.setNewsItem(savedNews)
                 adapterSavedNews?.notifyDataSetChanged()
+            }
+
+            if (savedNews.isEmpty()){
+                binding?.tvSavedEmpty!!.visibility = View.VISIBLE
             }
         }
 
