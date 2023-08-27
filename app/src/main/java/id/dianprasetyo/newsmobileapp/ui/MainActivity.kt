@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.get
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private lateinit var themeViewModel: ThemeViewModel
     private lateinit var newsViewModel : NewsViewModel
-    private val listCategory = listOf<String>(
+    private val listCategory = listOf(
         "indonesia", "indonesia/politics", "indonesia/jakarta", "indonesia/society",
         "indonesia/archipelago", "business", "business/economy" , "business/tech", "business/companies",
         "business/regulations", "business/markets", "world", "world/asia-pacific", "world/americas",

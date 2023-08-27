@@ -1,20 +1,18 @@
 package id.dianprasetyo.newsmobileapp.ui
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterNewsExplore
 import id.dianprasetyo.newsmobileapp.api.APIConfig
 import id.dianprasetyo.newsmobileapp.databinding.ActivityNewsListByCategoryBinding
-import id.dianprasetyo.newsmobileapp.databinding.FragmentExploreBinding
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
 import id.dianprasetyo.newsmobileapp.model.ResponseNews
 import id.dianprasetyo.newsmobileapp.viewmodel.NewsListByCategoryViewModel
-import id.dianprasetyo.newsmobileapp.viewmodel.NewsViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +26,7 @@ class NewsListByCategoryActivity : AppCompatActivity() {
         const val EXTRA_URL = "extra_url"
         const val EXTRA_CATEGORY = ""
     }
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsListByCategoryBinding.inflate(layoutInflater)

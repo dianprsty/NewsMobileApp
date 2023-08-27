@@ -7,7 +7,7 @@ object APIConfig {
 
     const val baseUrl = "https://jakpost.vercel.app/api/"
 
-    fun getRetrofit() : Retrofit {
+    private fun getRetrofit() : Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

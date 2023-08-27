@@ -23,12 +23,8 @@ data class ResponseNews(
 ) : Parcelable {
 	constructor(parcel: Parcel) : this(
 		parcel.readString(),
-		TODO("pagination"),
-		TODO("posts"),
-		TODO("featuredPost"),
 		parcel.readValue(Int::class.java.classLoader) as? Int
-	) {
-	}
+	)
 
 	override fun writeToParcel(parcel: Parcel, flags: Int) {
 		parcel.writeString(important)
