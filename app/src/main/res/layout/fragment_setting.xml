@@ -64,7 +64,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_about_title"
             android:layout_marginTop="16dp"
-            android:text="Developed by : Dian Prasetyo"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Developed by"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_developer_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_developer_label"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:text="Dian Prasetyo"
             android:textSize="16sp"
             />
 
@@ -73,9 +87,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_developer_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_developer_value"
             android:layout_marginTop="16dp"
-            android:text="Github : @dianprsty"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Github"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:id="@+id/tv_github_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_github_label"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:text="github.com/dianprsty"
             android:textSize="16sp"
             />
 
@@ -84,9 +113,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_github_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_github_value"
             android:layout_marginTop="16dp"
-            android:text="Email : dprasmail@gmail.com"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Email"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_email_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_label"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:text="dprasmail@gmail.com"
+            android:linksClickable="true"
+            android:autoLink="email"
             android:textSize="16sp"
             />
 
@@ -95,9 +140,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_email_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email_value"
             android:layout_marginTop="16dp"
-            android:text="Icon Pack by : flaticon.com"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Icon Pack by"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_icon_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_icon_label"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:text="flaticon.com"
             android:textSize="16sp"
             />
 
@@ -106,9 +167,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_icon_label"
+            app:layout_constraintTop_toBottomOf="@+id/tv_icon_value"
             android:layout_marginTop="16dp"
-            android:text="News Api by : github.com/faruqmaulana/JAKARTA-POST-API"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="News Api by"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_api_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_api_label"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="32dp"
+            android:lineHeight="24sp"
+            android:linksClickable="true"
+            android:autoLink="web"
+            android:text="github.com/faruqmaulana/JAKARTA-POST-API"
+
             android:textSize="16sp"
             />
 
