@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.dianprasetyo.newsmobileapp.R
 import id.dianprasetyo.newsmobileapp.adapter.AdapterSavedNews
 import id.dianprasetyo.newsmobileapp.databinding.FragmentSavedBinding
 import id.dianprasetyo.newsmobileapp.factory.ViewModelFactory
@@ -63,6 +65,7 @@ class SavedFragment : Fragment() {
             adapter = adapterSavedNews
         }
 
+        handleBackPressed()
 
         return binding?.root
     }
@@ -90,6 +93,20 @@ class SavedFragment : Fragment() {
     private fun obtainViewModel(activity: AppCompatActivity): SavedNewsViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
         return ViewModelProvider(activity, factory)[SavedNewsViewModel::class.java]
+    }
+
+    fun handleBackPressed(){
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val fragmentManager = parentFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+
+                fragmentTransaction
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
+            }
+        })
+
     }
 
     override fun onDestroy() {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -71,6 +72,8 @@ class SettingFragment() : Fragment() {
         binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             themeViewModel.saveTheme(isChecked)
         }
+
+        handleBackPressed()
         return binding.root
     }
 
@@ -94,5 +97,18 @@ class SettingFragment() : Fragment() {
             }
     }
 
+    fun handleBackPressed(){
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val fragmentManager = parentFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+
+                fragmentTransaction
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
+            }
+        })
+
+    }
 
 }

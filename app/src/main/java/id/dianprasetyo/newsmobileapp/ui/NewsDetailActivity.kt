@@ -1,10 +1,14 @@
 package id.dianprasetyo.newsmobileapp.ui
 
+import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -44,7 +48,12 @@ class NewsDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
 
         getCurrentTheme()
 
@@ -106,6 +115,11 @@ class NewsDetailActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     fun verifyIsNewsSaved(detailPost: DetailPost){

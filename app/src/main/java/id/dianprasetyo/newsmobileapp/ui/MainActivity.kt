@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.get
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -54,9 +55,11 @@ class MainActivity : AppCompatActivity() {
         }
         if (savedInstanceState == null){
             loadFragment(HomeFragment())
+
         }
 
         binding?.bottomNavigation?.setOnItemSelectedListener {
+
             when(it.itemId){
                 R.id.menu_home -> {
                     loadFragment(HomeFragment())
@@ -78,7 +81,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -87,7 +89,6 @@ class MainActivity : AppCompatActivity() {
 
         fragmentTransaction
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
             .commit()
     }
 

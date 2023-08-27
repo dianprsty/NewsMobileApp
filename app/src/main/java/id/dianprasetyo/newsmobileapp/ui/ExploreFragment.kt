@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
@@ -79,8 +81,6 @@ class ExploreFragment : Fragment() {
 
         })
 
-
-
         adapterNewsExplore = AdapterNewsExplore(requireContext())
         binding?.rvExploreNews?.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -88,6 +88,7 @@ class ExploreFragment : Fragment() {
             adapter = adapterNewsExplore
         }
 
+        handleBackPressed()
 
 
         return binding?.root
@@ -111,6 +112,20 @@ class ExploreFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun handleBackPressed(){
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val fragmentManager = parentFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+
+                fragmentTransaction
+                    .replace(R.id.fragment_container, HomeFragment())
+                    .commit()
+            }
+        })
+
     }
 
     private fun obtainViewModel(activity: AppCompatActivity): NewsViewModel {
